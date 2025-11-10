@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html x-data="{GLOBALS:{theme:'light'}}" :class="GLOBALS.theme" :style="`color-scheme: ${GLOBALS.theme};`" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>Thermostat</title>
+
+    <script>
+        const $import = (url, obj = {}, key = '') => import(url).then(r => obj[key] = r.default || r);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body x-cloak>
+    <div x-data="{txt:'Hello world!'}" x-text="txt" class="text-xl text-red-500"></div>
+</body>
+
+</html>
