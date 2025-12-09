@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html x-data="{GLOBALS:{theme:'light'}}" :class="GLOBALS.theme" :style="`color-scheme: ${GLOBALS.theme};`" lang="en">
+<html x-data="{URL:''}" lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thermostat</title>
 
-    <script>
-        const $import = (url, obj = {}, key = '') => import(url).then(r => obj[key] = r.default || r);
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="css/shadcn.css">
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        var $import = url => {
+            let importModule = u => import(u).then(mod => mod.default || mod);
+
+            if (Array.isArray(url)) {
+                let urls = url.map(u => u.includes('://') ? u : '../' + u);
+                return Promise.all(urls.map(importModule));
+            }
+            return importModule(url.includes('://') ? url : '../' + url);
+        };
+
+        var $log = value => (console.log(value), value);
+
+        var $cleanup = (el,html) => (el && [...el.querySelectorAll(':scope > *')].forEach(e => e.remove()), html);
+    </script>
 </head>
 
 <body x-cloak>
-    <div x-data="{txt:'Hello world!'}" x-text="txt" class="text-xl text-red-500"></div>
+    <div x-html="$import(URL+'js/modules/template.mjs').then(r=>r(URL+'components/pages')).then(r=>$cleanup($el, r))"></div>
 </body>
 
 </html>
