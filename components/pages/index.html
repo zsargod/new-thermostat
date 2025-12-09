@@ -36,7 +36,7 @@
 </template>
 
 <table x-data="{forecast: null,now: (new Date()).getHours()}"
-       x-init="fetch('http://api.weatherapi.com/v1/forecast.json?key=63862b95a21d4fb7b36211412250412&q=Budapest&days=2&aqi=no&alerts=no').then(r=>r.json()).then(r=>forecast = r.forecast.forecastday).then(console.log)" class="w-full striped">
+       x-init="fetch('https://api.weatherapi.com/v1/forecast.json?key=63862b95a21d4fb7b36211412250412&q=Budapest&days=2&aqi=no&alerts=no').then(r=>r.json()).then(r=>forecast = r.forecast.forecastday).then(console.log)" class="w-full striped">
     <template x-for="(row,n) in settings" :key="n">
         <tr  
         x-init="$el.scrollIntoView(true)" 
