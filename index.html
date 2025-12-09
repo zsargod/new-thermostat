@@ -32,7 +32,7 @@
 </head>
 
 <body x-cloak>
-    <div x-html="$import(URL+'js/modules/template.mjs').then(r=>r(URL+'components/pages')).then(r=>$cleanup($el, r))"></div>
+    <div x-html="$import(URL+'js/modules/template.mjs').then(r=>r('components/pages')).then(r=>$cleanup($el, r))"></div>
 </body>
 
 </html>
